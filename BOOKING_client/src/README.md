@@ -1,3 +1,11 @@
+--------------------------------------------------------------
+DESPLIEGUE DEL PROYECTO
+
+link : https://proyecto-integrador-enyoi.vercel.app/
+
+
+--------------------------------------------------------------
+
 <BrowserRouter>
 </BrowserRouter>
 
@@ -128,3 +136,20 @@ FONTAWESOME
 
 link: https://fontawesome.com/icons
 pagina para descargar iconos 
+
+----------------------------------------------------------------
+
+IMG
+
+se debe configurar el archivo vite.congig
+para que el proyecto admita imagenes PNG
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  assetsInclude: ['**/*.PNG']
+})
+
