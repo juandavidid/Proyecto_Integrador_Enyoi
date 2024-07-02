@@ -21,14 +21,20 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from "date-fns"
 
 
-// Importamos
+// Importamos  useState
 import { useState } from "react";
+
+import { useNavigate } from 'react-router-dom';
+
 
 // Declaramos una funcion componente
 const Header = ({ type }) => {
 
 
     // INICIALIZAR HOOK
+
+    // declaracion de un estado HOOK para hacerl filtro del BOTON search
+    const [destination, setDestination] = useState(false);
 
     // declaracion de un estado HOOK Mostrar calendario
     const [openDate, setOpenDate] = useState(false)
@@ -51,6 +57,10 @@ const Header = ({ type }) => {
         room: 1
     })
 
+
+
+    const navigate = useNavigate()
+
     //Funcion 
 
     /*
@@ -67,6 +77,14 @@ const Header = ({ type }) => {
                 // al final devuelve objeto
             }
         })
+
+    }
+
+    // Funcion para el Boton de Busqueda
+
+    const handleSearch = () => {
+        // metodo para navegar a otra pagina
+        navigate("/hotels", { state: { destination, date, options } })
 
     }
 
@@ -122,6 +140,10 @@ const Header = ({ type }) => {
                                     type="text"
                                     placeholder='Where are you going ?'
                                     className="headerSearchInput"
+                                    onChange={(e) => {
+                                        console.log(e);
+                                        setDestination(e.target.value)
+                                    }}
                                 />
                             </div>
 
@@ -198,7 +220,7 @@ const Header = ({ type }) => {
                             </div>
                             {/*Boton Busqueda */}
                             <div className="headerSearchItem">
-                                <button className="headerBtn">Search</button>
+                                <button className="headerBtn" onClick={handleSearch}>Search</button>
                             </div>
 
 

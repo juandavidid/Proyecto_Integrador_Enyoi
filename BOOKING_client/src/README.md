@@ -33,6 +33,14 @@ DEPENDENCIAS
 
 es una biblioteca de enrutamiento para aplicaciones React que permite gestionar la navegación y las rutas en una aplicación de una sola página (SPA).
 
+    * useNavigate  permite poder navegar de una ruta a otra mendiante captura de evento
+      conts nav = useNavigate()
+      nav("/ruta", {state:{parametro1,parametro2,....}})
+
+    * useLocation   permite obtener informacion de la url  
+      const locaion = useLocation();
+
+
 2.--save @fortawesome/fontawesome-svg-core
 
 una popular colección de iconos utilizados en el desarrollo web. Instalar esta dependencia proporciona el núcleo necesario para usar iconos SVG con Font Awesome en tu proyecto.

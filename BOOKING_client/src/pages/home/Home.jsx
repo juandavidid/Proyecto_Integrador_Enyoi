@@ -24,10 +24,6 @@ const Home = () => {
                 <FeaturedPropeties />
                 <MailList />
                 <Footer />
-
-
-
-
             </div>
         </div>
     )
