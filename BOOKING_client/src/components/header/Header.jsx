@@ -171,6 +171,7 @@ const Header = ({ type }) => {
                                     moveRangeOnFirstSelection={false}
                                     ranges={date}  // Inicialmente ubica la fecha inicial y final  antes de seleccionar fechas en el calendario
                                     className="date"
+                                    minDate={new Date()}
                                 />
 
                                 }
