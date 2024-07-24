@@ -87,6 +87,14 @@ atributo que desabilita un elemento de html ,  segun su  condicion
 
 En el contexto de React, la desestructuración es comúnmente usada para extraer props directamente en la firma de la función del componente. 
 
+6. Interpolación de Valores: 
+La interpolación de valores es el proceso de insertar variables o expresiones dentro de JSX utilizando llaves {}. Dentro de las llaves, puedes incluir cualquier expresión JavaScript válida, y su valor resultante se renderizará en el DOM.
+
+ejemplo 
+
+<h2> { data[0] } properties</h2>
+
+
 ------------------------------------------------------------
 
 HTML
