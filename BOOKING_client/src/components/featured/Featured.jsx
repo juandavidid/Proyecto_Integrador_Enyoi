@@ -1,7 +1,11 @@
 import "./featured.css"
+import useFetch from "../../hooks/useFetch"
 
 // Declaramos una funcion Componente
 const Featured = () => {
+    const { data, loading, error } = useFetch('http://localhost:8800/api/hotels/countByCity?cities=berlin,madrid,london')  //    /hotels/countByCity?cities=berlin,madrid,london  'http://localhost:8800/api/hotels/countByCity?cities=berlin,madrid,london'
+    console.log(data)
+    console.log("Hola estoy aqui")
     return (
         <div className="featured">
             <div className="featuredItem">
@@ -9,7 +13,6 @@ const Featured = () => {
                 <div className="featuredTitles">
                     <h1>Dublin</h1>
                     <h2>123 properties</h2>
-
                 </div>
             </div>
 
@@ -30,9 +33,6 @@ const Featured = () => {
 
                 </div>
             </div>
-
-
-
         </div>
     )
 }
