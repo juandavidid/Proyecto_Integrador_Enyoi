@@ -1,10 +1,12 @@
 import './featuredProperties.css'
 
 import imgHotel from '../../img/imgHotel.PNG'
+import useFetch from '../../hooks/useFetch'
 
 // Funcion componente
 
 const FeaturedPropeties = () => {
+    const { data, loading, error } = useFetch("/api/hotels/countByType")
     return (
         <div className="fp">
 
