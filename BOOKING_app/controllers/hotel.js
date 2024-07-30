@@ -33,52 +33,24 @@ export const deleteHotel = async (req, res, next) => {
 
 export const getHotel = async (req, res, next) => {
     try {
-        const hotel = await Hotel.findById(req.params.id)
-        res.status(200).json(hotel)
+        console.log(req.params);
+        const hotel = await Hotel.findById(req.params.id)  // Metodo .findById() que se usa para consultar los parametos de un objeto que esta en la Base de datos
+        console.log(hotel);
+        res.status(200).json(hotel) // Se envia una respuesta al cliente   estados 200 y  convertir un objeto a objeto JSON
     } catch (err) {
         next(err);
 
     }
 }
 
+// OBTENER TODOS LOS HOTELES
 export const getHotels = async (req, res, next) => {
-
-    const { featured, limit, ...otherFilters } = req.query; // Desestructuracion de Objetos
+    const { limit, min, max, ...others } = req.query; // Desestructuracion de Objetos
     try {
-
-
-        // Crear un objeto de filtros
-        let filters = { ...otherFilters };
-        // Si el filtro 'featured' está presente, agregarlo a los filtros
-        if (featured) {
-            filters.featured = featured === 'true'; // Convertir a booleano
-        }
-
-        // Convertir 'limit' a número
-        //const limitNumber = Number(limit);
-
-        // Agregar mensajes de registro
-        console.log('Filters:', filters);
-        //console.log('Limit:', limitNumber);
-
-        // Ejecutar la consulta con los filtros y límite
-        const hotels = await Hotel.find(req.query).limit(req.query.limit);
-        console.log(hotels)
-
-        res.status(200).json(hotels);
-
-
-        /*
-
-        const  parametos= req.query
-        const hotels = await Hotel.find(req.query).limit(3)
-        console.log(req.query);
-        console.log(hotels);
+        const hotels = await Hotel.find({ ...others, cheapestPrice: { $gt: min | 1, $lt: max || 999 } }).limit(req.query.limit); //Obtener datos de los Hoteles por filtros
         res.status(200).json(hotels)
-        */
     } catch (err) {
         next(err);
-
     }
 }
 
