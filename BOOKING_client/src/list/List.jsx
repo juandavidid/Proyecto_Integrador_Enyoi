@@ -15,8 +15,11 @@ import { DateRange } from 'react-date-range'
 
 
 // Importamos Un componente
-import Searchitem from '../components/searchItem/Searchitem'
+import Searchitem from '../components/searchItem/Searchitem';
 
+// Importamos hook
+
+import useFetch from '../../src/hooks/useFetch';
 
 const List = () => {
 
@@ -24,11 +27,26 @@ const List = () => {
     const location = useLocation();
     console.log(location)
     const [destination, setDestination] = useState(location.state.destination)
-    const [date, setDate] = useState(location.state.date)
-    const [openDate, setOpenDate] = useState(false)
+    const [dates, setDates] = useState(location.state.dates);
+    const [openDate, setOpenDate] = useState(false);  // const [openDate, setOpenDate] = useState(false)
     const [options, setOptions] = useState(location.state.options)
+    const [min, setMin] = useState(undefined);
+    const [max, setMax] = useState(undefined);
 
 
+    console.log(destination)
+
+
+    //Hook de solicitudes a la APP servidor
+    const { data, loading, error, reFetch } = useFetch(`/api/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`); // &min=${min || 0}&max=${max || 999}
+    console.log(data);
+
+    // Funcion handleClick
+    // Se usa esta funcion cuando el usuario ingresa informacion y los datos no cambia dinamicamente si no toca mediante la accion de seleccionar un boton
+    const handleClick = () => {
+        reFetch(); // Metodo : para solicitar datos al servidor 
+
+    }
     return (
         <div>
             <Navbar />
@@ -45,9 +63,9 @@ const List = () => {
                             <label>Check-in Date</label>
 
                             {/*fomateo de la fecha para mostrar */}
-                            <span onClick={() => setOpenDate(!openDate)}>{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}  `}</span>
+                            <span onClick={() => setOpenDate(!openDate)}>{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}  `}</span>
 
-                            {openDate && (<DateRange onChange={(item) => setDate([item.selection])} minDate={new Date()} ranges={date} />)}
+                            {openDate && (<DateRange onChange={(item) => setDates([item.selection])} minDate={new Date()} ranges={dates} />)}
 
                         </div>
 
@@ -55,14 +73,21 @@ const List = () => {
                             <label>Options</label>
                             <div className="lsOptions">
 
-                                <div className="lsOptionItem">
-                                    <span className="lsOptionText">Min price <small>per night</small></span>
-                                    <input type="number" className="lsOptionInput"></input>
-                                </div>
+                                {/* PRECIO MINIMO */}
 
                                 <div className="lsOptionItem">
+                                    <span className="lsOptionText">Min price <small>per night</small></span>
+
+                                    {/*Campo numerico donde ingresa el valor precio minimo */}
+                                    <input type="number" onChange={e => setMin(e.target.value)} className="lsOptionInput"></input> {/* onChange={e => setMin(e.target.value)} Capturamos el valor que se ingresa en la caja de texto */}
+                                </div>
+
+                                {/* PRECIO MAXIMO */}
+                                <div className="lsOptionItem">
                                     <span className="lsOptionText">Max price <small>per night</small></span>
-                                    <input type="number" className="lsOptionInput"></input>
+
+                                    {/*Campo numerico donde ingresa el valor precio maximo */}
+                                    <input type="number" onChange={e => setMax(e.target.value)} className="lsOptionInput"></input>  {/* onChange={e => setMin(e.target.value)} Capturamos el valor que se ingresa en la caja de texto */}
                                 </div>
 
                                 <div className="lsOptionItem">
@@ -87,19 +112,21 @@ const List = () => {
 
                         </div>
 
-                        <button>Search</button>
+                        {/*BOTON BUSCAR */}
+                        <button onClick={handleClick}>Search</button>
 
 
                     </div>
-                    {/* MUESTRA LOS HOTELES CUARTOS */}
+
+
+                    {/* MUESTRA LOS HOTELES */}
                     <div className="listResult">
 
-                        <Searchitem />
-                        <Searchitem />
-                        <Searchitem />
-                        <Searchitem />
-                        <Searchitem />
-                        <Searchitem />
+                        {loading ? ("loading") : (<>
+                            {data.map(item => (
+                                <Searchitem item={item} key={item._id} />
+                            ))}
+                        </>)}
                     </div>
 
                 </div>

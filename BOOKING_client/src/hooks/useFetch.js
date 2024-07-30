@@ -55,7 +55,7 @@ const useFetch = (url) => {
         fetchData();
 
 
-    }, [url])  // se coloca la url como segundo argumento,  ya que la url va cambiar dinamicamente
+    }, [url])  // se coloca la url como segundo argumento,  ya que la url va cambiar dinamicamente esto se hace con el objetivo de que si el usuario ingresa,selecciona o  click en un boton los datos cambien dinamicamente
 
 
     // Metodo para hacer  solicitud de HTTP  cuando no es necesario  recargar la pagina  y el usuario realiza un cambio como seleccionar un boton y cambie algo .
@@ -66,6 +66,7 @@ const useFetch = (url) => {
         try {
 
             const res = await axios.get(url)
+            console.log("Solicitud segunda", res);
             setData(res.data);
 
         } catch (err) {

@@ -20,11 +20,14 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 // Importamos el metodo format para formatear fechas
 import { format } from "date-fns"
 
-
 // Importamos  useState
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { useNavigate } from 'react-router-dom';
+
+
+
+import { SearchContext } from '../../context/SearchContext.jsx'
 
 
 // Declaramos una funcion componente
@@ -39,7 +42,7 @@ const Header = ({ type }) => {
     // declaracion de un estado HOOK Mostrar calendario
     const [openDate, setOpenDate] = useState(false)
     // declaracion de un estado HOOK Capturar  la seleccion de fechas
-    const [date, setDate] = useState([
+    const [dates, setDates] = useState([
         {
             startDate: new Date(),
             endDate: new Date(),
@@ -80,11 +83,21 @@ const Header = ({ type }) => {
 
     }
 
+
+    // Uso SearchContext
+    const { dispatch } = useContext(SearchContext)
+
+
+
     // Funcion para el Boton de Busqueda
 
     const handleSearch = () => {
+
+        dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } })
+
+
         // metodo para navegar a otra pagina
-        navigate("/hotels", { state: { destination, date, options } })
+        navigate("/hotels", { state: { destination, dates, options } })
 
     }
 
@@ -150,7 +163,7 @@ const Header = ({ type }) => {
                             <div className="headerSearchItem">
                                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
 
-                                <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}  `}</span>
+                                <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}  `}</span>
 
                                 {/*COMPONENTE CALENDARIO Y SELECCIONAR FECHA */}
 
@@ -158,7 +171,7 @@ const Header = ({ type }) => {
                                 {/* Condicional para renderizar  es decir para mostra el calendario  y no mostrarlo */}
                                 {openDate && <DateRange
                                     editableDateInputs={true} // permite seleccionar las fechas en los campos de entrada que tiene el  calendario 
-                                    onChange={item => setDate([item.selection])}
+                                    onChange={item => setDates([item.selection])}
                                     /*
                                     onChange={item => {
                                         setDate([item.selection]);
@@ -169,7 +182,7 @@ const Header = ({ type }) => {
                                     }}
                                     */
                                     moveRangeOnFirstSelection={false}
-                                    ranges={date}  // Inicialmente ubica la fecha inicial y final  antes de seleccionar fechas en el calendario
+                                    ranges={dates}  // Inicialmente ubica la fecha inicial y final  antes de seleccionar fechas en el calendario
                                     className="date"
                                     minDate={new Date()}
                                 />
