@@ -26,8 +26,9 @@ import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 
-
+//INVESTIGAR uso de React y el contexto
 import { SearchContext } from '../../context/SearchContext.jsx'
+import { AuthContext } from '../../context/AuthContext.jsx'
 
 
 // Declaramos una funcion componente
@@ -49,6 +50,8 @@ const Header = ({ type }) => {
             key: 'selection'
         }
     ]);
+
+
     // Declaracion de un estado HOOK
 
     // Se usa para abrir o cerrar un menú de opciones.
@@ -63,6 +66,7 @@ const Header = ({ type }) => {
 
 
     const navigate = useNavigate()
+    const { user } = useContext(AuthContext);
 
     //Funcion 
 
@@ -84,7 +88,7 @@ const Header = ({ type }) => {
     }
 
 
-    // Uso SearchContext
+    // INVESTIGAR  Uso SearchContext
     const { dispatch } = useContext(SearchContext)
 
 
@@ -141,7 +145,8 @@ const Header = ({ type }) => {
                             Get rewarded for your travels - unlock instant saving of 10% or
                             more with a free lamabooking account
                         </p>
-                        <button className="headerBtn">Sing in / Register</button>
+                        {/*Quita la opcion Sing in / Register cuando el usuario se logea */}
+                        {!user && <button className="headerBtn">Sing in / Register</button>}
 
                         {/*ESTRUCTURA DEL BUSCADOR */}
                         <div className="headerSearch">

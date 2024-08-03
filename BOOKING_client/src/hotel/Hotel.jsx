@@ -4,6 +4,7 @@ import Navbar from "../components/navbar/Navbar"
 import Header from "../components/header/Header"
 import Footer from "../components/footer/Footer"
 import MailList from "../components/mailList/MailList"
+import Reserve from '../components/reserve/Reserve.jsx'
 // Importamos Iconos
 // Renderiza Iconos en React 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,8 +12,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleArrowRight, faCircleArrowLeft, faCircleXmark, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { useContext, useState } from 'react'
 import useFetch from '../hooks/useFetch'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { SearchContext } from '../context/SearchContext.jsx'
+import { AuthContext } from '../context/AuthContext.jsx'
 
 
 
@@ -28,11 +30,31 @@ const Hotel = () => {
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
 
+    const [openModal, setOpenModal] = useState(false);
+
     // Hook Para solicitar datos al servidor    -->
     const { data, loading, error } = useFetch(`/api/hotels/find/${id}`);
 
-    const { dates } = useContext(SearchContext);
+
+    //React Contexto
+    const { user } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+
+    // INVESTIGAR  uso del contexto
+    const { dates, options } = useContext(SearchContext);
     console.log(dates);
+    //Funcion me Resta la fecha inicial con la Fecha final
+    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+    function dayDifference(date1, date2) {
+        const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+        return diffDays;
+    }
+    //Calcula el numero de dias que hay en una fecha Inicial y Final
+    const days = dayDifference(dates[0].endDate, dates[0].startDate);
+
 
     /*
      const photos = [
@@ -73,6 +95,13 @@ const Hotel = () => {
 
         setSlideNumber(newSlideNumber);
 
+    }
+    const handleClick = () => {
+        if (user) {
+            setOpenModal(true);
+        } else {
+            navigate("/login")
+        }
     }
     return (
         <div>
@@ -123,15 +152,15 @@ const Hotel = () => {
                             </p>
                         </div>
                         <div className="hotelDetailsPrice">
-                            <h1>Perfect for a 9-night stay!</h1>
+                            <h1>Perfect for a {days}-night stay!</h1>
                             <span>
                                 Located in the real heart of Krakow, this property has an
                                 excellent location score of 9.8!
                             </span>
                             <h2>
-                                <b>$945</b> (9 nights)
+                                <b>${days * data.cheapestPrice * options.room} nights</b> ({days} nights)  {/* Calculo de los dias  para saber cuantas noches son y el precio */}
                             </h2>
-                            <button>Reserve or Book Now!</button>
+                            <button onClick={handleClick}>Reserve or Book Now!</button>
                         </div>
 
                     </div>
@@ -145,6 +174,7 @@ const Hotel = () => {
 
 
             </div>)}
+            {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
         </div>
     )
 }
