@@ -18,24 +18,16 @@ const Reserve = ({ setOpen, hotelId }) => {
     //React Context
     const { dates } = useContext(SearchContext);
     //console.log(data);
-
-
-
     const getDatesInRange = (startDate, endDate) => {
-
         const start = new Date(startDate)
         const end = new Date(endDate)
-
         const date = new Date(start.getTime());
-
-        let list = []
-
-        while (data <= end) {
-            list.push(new Date(date))
+        const dates = []
+        while (date <= end) {
+            dates.push(new Date(date).getTime());
             date.setDate(date.getDate() + 1)
         }
-
-        return list
+        return dates
     };
 
     console.log(getDatesInRange(dates[0].startDate, dates[0].endDate))
@@ -45,7 +37,6 @@ const Reserve = ({ setOpen, hotelId }) => {
         const value = e.target.value
         setSelectedRooms(checked ? [...selectedRooms, value] : selectedRooms.filter((item) => item !== value));
     }
-
     //console.log(selectedRooms);
     const handleClick = () => {
 
