@@ -4,8 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Importamos las Rutas
 import Home from './pages/home/Home'
-import List from './list/List'
-import Hotel from './hotel/Hotel'
+import List from './pages/list/List'
+import Hotel from './pages/hotel/Hotel'
 import Login from "./pages/login/Login"
 function App() {
   return (
