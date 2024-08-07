@@ -46,5 +46,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8800"
+  "proxy": "https://proyecto-integrador-enyoi-m5v3.vercel.app/"
 }
