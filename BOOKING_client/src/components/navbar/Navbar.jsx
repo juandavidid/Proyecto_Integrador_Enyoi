@@ -20,7 +20,7 @@ const Navbar = () => {
                 {/* Agrego botones Registro y Login */}
                 {user ? user.username : (
                     <div className="navItems">
-                        <button className="navButton">Register</button>
+                        <button className="navButton">REGISTRO</button>
                         <button className="navButton">Login</button>
                     </div>)
                 }
