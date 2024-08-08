@@ -6,7 +6,7 @@ import useFetch from '../../hooks/useFetch'
 // Funcion componente
 
 const FeaturedPropeties = () => {
-    const { data, loading, error } = useFetch("/api/hotels?featured=true&limit=4")
+    const { data, loading, error } = useFetch("https://proyecto-integrador-enyoi-1-servidor.onrender.com/api/hotels?featured=true&limit=4")
     console.log(data)
     return (
         <div className="fp">
