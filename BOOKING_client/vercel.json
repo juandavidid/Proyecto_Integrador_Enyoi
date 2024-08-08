@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "https://proyecto-integrador-enyoi-1-servidor.onrender.com/api/$1"
+        }
+    ]
+}
