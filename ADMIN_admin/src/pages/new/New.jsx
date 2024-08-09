@@ -4,23 +4,26 @@ import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import axios from "axios";
-
 const New = ({ inputs, title }) => {
-  const [file, setFile] = useState("");
 
-  const [info, setInfo] = useState({})
+  console.log("Informacion del ", inputs);
+
+  const [file, setFile] = useState("");  // almacena archivo que selecciona
+  const [info, setInfo] = useState({})   // almacena la informacion  del formulario
 
   const handleChange = e => {
+
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+
   };
 
-
-
+  // Funcion que envia los Datos para el Registro
   const handleClick = async e => {
     e.preventDefault()
     const data = new FormData()
     data.append("file", file)
     data.append("upload_preset", "upload")
+
     try {
       const uploadRes = await axios.post(
         "https://api.cloudinary.com/v1_1/dyixunlwa/image/upload",
@@ -38,16 +41,21 @@ const New = ({ inputs, title }) => {
     }
   }
 
-  console.log(info);
 
+  console.log(info);
   return (
     <div className="new">
+
       <Sidebar />
+
       <div className="newContainer">
+
         <Navbar />
+
         <div className="top">
           <h1>{title}</h1>
         </div>
+
         <div className="bottom">
           <div className="left">
             <img
@@ -72,7 +80,6 @@ const New = ({ inputs, title }) => {
                   style={{ display: "none" }}
                 />
               </div>
-
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
                   <label>{input.label}</label>

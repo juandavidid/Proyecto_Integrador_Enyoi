@@ -2,9 +2,13 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
+
 import New from "./pages/new/New";
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 import { productInputs, userInputs } from "./formSource";
+
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
@@ -46,6 +50,7 @@ function App() {
               }
             />
             <Route path="users">
+
               <Route
                 index
                 element={
@@ -53,6 +58,7 @@ function App() {
                     <List columns={userColumns} />
                   </ProtectedRoute>}
               />
+
               <Route
                 path=":userId"
                 element={
@@ -60,6 +66,7 @@ function App() {
                     <Single />
                   </ProtectedRoute>}
               />
+
               <Route
                 path="new"
                 element={
@@ -68,6 +75,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+
             </Route>
 
             <Route path="hotels">

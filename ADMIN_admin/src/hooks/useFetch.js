@@ -39,7 +39,7 @@ const useFetch = (url) => {
 
                 const data = await res.json()
                 */
-                console.log(res)
+                console.log(res);
 
                 // Se envia la informacion a al variable data 
                 setData(res.data);

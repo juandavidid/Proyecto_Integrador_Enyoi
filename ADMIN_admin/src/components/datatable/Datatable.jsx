@@ -14,12 +14,12 @@ const Datatable = ({ columns }) => {
 
   const location = useLocation();
   const path = location.pathname.split("/")[1];
-  //console.log(path)
+  console.log(path)
 
   const [list, setList] = useState([]); // Linea de codigo nueva  nota: siempre colocar useState([])
   console.log(list);
   const { data, loading, error } = useFetch(`/api/${path}`);
-  console.log(data);
+  console.log("Datos de los usurios", data);
   console.log(loading);
   console.log(error);
 
@@ -38,9 +38,6 @@ const Datatable = ({ columns }) => {
     } catch (err) {
 
     }
-
-
-
 
   };
 
@@ -81,10 +78,7 @@ const Datatable = ({ columns }) => {
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
-
-
         getRowId={row => row._id}       // linea de codigo nueva
-
       />
     </div>
   );
