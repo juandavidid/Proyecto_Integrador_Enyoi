@@ -5,9 +5,7 @@ import { userInputs } from "../../formSource";
 
 import axios from "axios";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+
 
 import { Link, useNavigate } from 'react-router-dom';
 import MessagesRegister from "../../pages/register/messagesRegister/MessagesRegister";
