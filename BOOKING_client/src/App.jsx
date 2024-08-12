@@ -8,6 +8,7 @@ import List from './pages/list/List'
 import Hotel from './pages/hotel/Hotel'
 import Login from "./pages/login/Login"
 import Register from "./pages/register/Register";
+import UserReservations from "./components/userReservations/UserReservations";
 function App() {
   return (
     //Componente que permite Envolver todo una sola pagina
@@ -21,6 +22,7 @@ function App() {
         {/*Ruta de login */}
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/userReservations" element={<UserReservations />}></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -39,16 +39,51 @@ export const updateRoom = async (req, res, next) => {
     }
 };
 export const updateRoomAvailability = async (req, res, next) => {
+
+
+    // $push
     try {
+        const dates = req.body.dates;
+        if (dates.length === 0) {
+            // Si el array está vacío, vaciar o eliminar fechas con $set
+
+            await Room.updateOne(
+                { "roomNumbers._id": req.params.id },
+                {
+                    $set: {
+                        "roomNumbers.$.unavailableDates": []
+                    },
+                }
+            );
+            res.status(200).json("Room dates have been cleared.");
+
+
+        } else {
+
+            // Si el array tiene fechas, añadirlas con $push
+            await Room.updateOne(
+                { "roomNumbers._id": req.params.id },
+                {
+                    $push: {
+                        "roomNumbers.$.unavailableDates": { $each: dates }
+                    },
+                }
+            );
+            res.status(200).json("Room dates have been added.");
+
+        }
+
+        /*
         await Room.updateOne(
             { "roomNumbers._id": req.params.id },
             {
-                $push: {
+                $set: {
                     "roomNumbers.$.unavailableDates": req.body.dates
                 },
             }
         );
         res.status(200).json("Room status has been updated.");
+        */
     } catch (err) {
         next(err);
     }

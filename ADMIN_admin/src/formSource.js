@@ -34,6 +34,14 @@ export const userInputs = [
     type: "text",
     placeholder: "USA",
   },
+  {
+    id: "isAdmin",
+    label: "Admin",
+    type: "checkbox",
+    placeholder: "",
+    // Puedes agregar un valor que se enviará en el formulario
+    // Por ejemplo: value: true
+  },
 ];
 
 export const productInputs = [

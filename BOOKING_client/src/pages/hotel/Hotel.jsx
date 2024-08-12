@@ -34,7 +34,7 @@ const Hotel = () => {
 
     // Hook Para solicitar datos al servidor    -->
     const { data, loading, error } = useFetch(`/api/hotels/find/${id}`);
-
+    console.log("Informacion del hotel", data);
 
     //React Contexto
     const { user } = useContext(AuthContext);
@@ -43,7 +43,9 @@ const Hotel = () => {
 
 
     // INVESTIGAR  uso del contexto
+    // Informacion de la fecha
     const { dates, options } = useContext(SearchContext);
+
     console.log(dates);
     //Funcion me Resta la fecha inicial con la Fecha final
     const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -54,6 +56,7 @@ const Hotel = () => {
     }
     //Calcula el numero de dias que hay en una fecha Inicial y Final
     const days = dayDifference(dates[0].endDate, dates[0].startDate);
+    const totalPrice = days * data.cheapestPrice * options.room;
 
 
     /*
@@ -158,7 +161,7 @@ const Hotel = () => {
                                 excellent location score of 9.8!
                             </span>
                             <h2>
-                                <b>${days * data.cheapestPrice * options.room} nights</b> ({days} nights)  {/* Calculo de los dias  para saber cuantas noches son y el precio */}
+                                <b>${totalPrice} nights</b> ({days} nights)  {/* Calculo de los dias  para saber cuantas noches son y el precio */}
                             </h2>
                             <button onClick={handleClick}>Reserve or Book Now!</button>
                         </div>
@@ -174,7 +177,7 @@ const Hotel = () => {
 
 
             </div>)}
-            {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
+            {openModal && <Reserve totalPrice={totalPrice} setOpen={setOpenModal} hotelId={id} />}
         </div>
     )
 }

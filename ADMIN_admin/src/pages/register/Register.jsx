@@ -1,4 +1,4 @@
-import "./register.css"
+import "./register.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { userInputs } from "../../formSource";
@@ -10,10 +10,7 @@ import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { Link, useNavigate } from 'react-router-dom';
-
-import MessagesRegister from "./messagesRegister/MessagesRegister";
-
-
+import MessagesRegister from "../../pages/register/messagesRegister/MessagesRegister";
 
 const Register = () => {
 
@@ -23,10 +20,22 @@ const Register = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [info, setInfo] = useState({});
+  console.log("Dato del usuario  a enviar", info)
 
   const navigate = useNavigate();
+
+
   const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+
+    const { id, type, checked, value } = e.target;
+    setInfo((prev) => ({
+      ...prev,
+      [id]: type === "checkbox" ? checked : value, // Maneja el checkbox
+    }));
+
+
+
+    //setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
   const handleClick = async (e) => {
@@ -74,12 +83,11 @@ const Register = () => {
       <div>
         <nav className="navlogin">
           <span className="logo" style={{ fontSize: '25px' }}>Booking.com</span>
-          <div>
-            <FontAwesomeIcon className="iconSingIn" icon={faSignInAlt} />
-            <FontAwesomeIcon className="textQuestion" icon={faCircleQuestion} />
 
+          <span></span>
+          <div className="admin">
+            <span>Admin Dashboard</span>
           </div>
-
         </nav>
       </div>
       <div className="newUserContainer">
@@ -88,12 +96,21 @@ const Register = () => {
           {userInputs.map((input) => (
             <div className="formInput" key={input.id}>
               <label>{input.label}</label>
-              <input
-                onChange={handleChange}
-                type={input.type}
-                placeholder={input.placeholder}
-                id={input.id}
-              />
+              {input.type === "checkbox" ? ( // Maneja el checkbox
+                <input
+                  onChange={handleChange}
+                  type={input.type}
+                  id={input.id}
+                />
+              ) : (
+                <input
+                  onChange={handleChange}
+                  type={input.type}
+                  placeholder={input.placeholder}
+                  id={input.id}
+                />
+              )}
+
             </div>
           ))}
           <Link to={"/"}>
@@ -107,21 +124,7 @@ const Register = () => {
 
       {openModal && <MessagesRegister />}
 
-      <div className="text-container">
-        <p>
-          Al iniciar sesión o al crear una cuenta, aceptas nuestros Términos y
-        </p>
-        <p>
-          condiciones y la Política de privacidad.
-        </p>
-        <p>
-          Todos los derechos reservados. Copyright (2006 - 2024) - Booking.com™
-        </p>
-        <p>
-          Copyright (2006 - 2024) - Booking.com™
 
-        </p>
-      </div>
 
     </div>
 

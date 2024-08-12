@@ -5,6 +5,9 @@
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/icons-material": "^5.4.4",
     "@mui/material": "^5.4.4",
     "@mui/x-data-grid": "^5.5.1",
@@ -46,5 +49,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8800"
+  "proxy": "https://proyecto-integrador-enyoi-1-servidor.onrender.com"
 }

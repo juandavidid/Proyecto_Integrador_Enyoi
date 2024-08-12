@@ -6,17 +6,28 @@ import { useContext, useState } from 'react';
 import { SearchContext } from '../../context/SearchContext';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
-const Reserve = ({ setOpen, hotelId }) => {
+const Reserve = ({ setOpen, hotelId, totalPrice }) => {
+    const { user } = useContext(AuthContext);
+    console.log("Informacion del usuario", user);  // Dato del usuario iniciar sesion
 
     const [selectedRooms, setSelectedRooms] = useState([]);
+    console.log("Informacion selecionar ", selectedRooms); // id del numero del cuarto  de la habitacion
+
 
     //Solicitud al servidor
     const { data, loading, error } = useFetch(`/api/hotels/room/${hotelId}`);
+    console.log("Informacion de la data", data);  // data esta la informacion  del Habitacion con su numeros de cuartos
 
 
     //React Context
     const { dates } = useContext(SearchContext);
+    console.log("Informacion contexto", dates)   // dates esta la informacion de la fecha seleccionada por usuario
+
+    console.log("Id del Hotel seleccionado", hotelId);   // 
+
+
     //console.log(data);
     const getDatesInRange = (startDate, endDate) => {
         const start = new Date(startDate)
@@ -50,7 +61,9 @@ const Reserve = ({ setOpen, hotelId }) => {
     //console.log(selectedRooms);
 
     const navigate = useNavigate()
-    // Funcion que permite desabilitar la opcion del cuarto
+
+
+    // Funcion que permite enviar los datos al servidor para desabilitar la opcion del numero del cuarto 
     const handleClick = async () => {
         try {
             await Promise.all(
@@ -61,6 +74,23 @@ const Reserve = ({ setOpen, hotelId }) => {
                     return res.data
                 })
             );
+
+            // Crear la reserva en el backend
+            const reservationData = {
+                user: user._id, // ID del usuario autenticado
+                hotel: hotelId, // ID del hotel seleccionado
+                room: data[0]._id, // ID de la primera habitación seleccionada (puedes ajustar esto según tu lógica)
+
+                roomNumber: data.find(item => item.roomNumbers.some(rn => rn._id === selectedRooms[0])).roomNumbers.find(rn => rn._id === selectedRooms[0]).number,
+                startDate: dates[0].startDate.toISOString(),
+                endDate: dates[0].endDate.toISOString(),
+                totalPrice: totalPrice  //data.find(item => item.roomNumbers.some(rn => rn._id === selectedRooms[0])).price * alldates.length,
+            };
+            console.log("Id del Habitacion", reservationData.room);
+
+            const res = await axios.post('/api/reservations', reservationData);
+
+            console.log('Reserva realizada con éxito:', res.data);
             setOpen(false)
             navigate("/")
         } catch (err) { }

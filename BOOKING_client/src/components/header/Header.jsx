@@ -10,6 +10,7 @@ import { faCar } from '@fortawesome/free-solid-svg-icons'
 import { faTaxi } from '@fortawesome/free-solid-svg-icons'
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 import { faPerson } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 // Importamos Calendario de fecha
 import { DateRange } from 'react-date-range'

@@ -1,6 +1,7 @@
 .login {
-    height: 100vh;
+    /*height: 100vh;*/
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -9,6 +10,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-top: 50px;
 }
 
 .lInput {
@@ -29,4 +31,58 @@
 .lButton:disabled {
     background-color: #0071c28c;
     cursor: not-allowed;
+}
+
+
+.navlogin {
+    width: 100%;
+    height: 70px;
+    background-color: #003580;
+    display: flex;
+    justify-content: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+
+}
+
+.logo {
+    margin-top: 12px;
+    margin-left: 20px;
+}
+
+.textLogin {
+    margin-top: 100px
+}
+
+.textQuestion {
+    margin-right: 40px;
+    font-size: 20px;
+    margin-top: 16px;
+}
+
+
+
+.iconSingIn {
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    /* Para que los textos estén uno debajo del otro */
+    align-items: center;
+    /* Centrar verticalmente */
+    justify-content: center;
+    /* Centrar horizontalmente */
+    height: 150px;
+    /* O el alto que necesites */
+    text-align: center;
+    /* Asegura que el texto esté centrado horizontalmente */
+    padding: 20px;
+    /* Espacio alrededor del texto, si lo deseas */
+    font-size: 12px;
+    line-height: 4px;
 }

@@ -1,10 +1,14 @@
 import "./login.scss"
+import "./login.css"
 import axios from "axios";
 import { useState } from "react"
 import { useContext } from "react";
 //import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../context/AuthContext";
+
+import Register from "../register/Register";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
@@ -46,18 +50,45 @@ const Login = () => {
   //console.log(user);
 
   return (
-    <div className="login">
-      <div className="lContainer">
+    <div >
 
-        {/*Campo de texto  usuario */}
-        <input type="text" placeholder="username" id="username" onChange={handleChange} className="lInput" ></input>
-        {/*Campo de texto  contraseña */}
-        <input type="password" placeholder="password" id="password" onChange={handleChange} className="lInput" ></input>
-        {/*Boton */}
-        <button disabled={loading} onClick={handleClick} className="lButton">Login</button>
 
-        {error && <span>{error.message}</span>}
+      <nav className="navlogin">
+        <span className="logo" style={{ fontSize: '25px' }}>Booking.com</span>
+
+        <span></span>
+        <div className="admin">
+          <span>Admin Dashboard</span>
+        </div>
+      </nav>
+
+
+
+      <div className="login">
+
+
+        <div className="lContainer">
+
+          <h1 className="textLogin">Login In</h1>
+
+
+
+          {/*Campo de texto  usuario */}
+          <input type="text" placeholder="username" id="username" onChange={handleChange} className="lInput" ></input>
+          {/*Campo de texto  contraseña */}
+          <input type="password" placeholder="password" id="password" onChange={handleChange} className="lInput" ></input>
+          {/*Boton */}
+          <button disabled={loading} onClick={handleClick} className="lButton">Login</button>
+
+          <Link to="/register" style={{ textDecoration: 'none' }}>
+            <span className="textregister">Registrater</span>
+          </Link>
+
+          {error && <span>{error.message}</span>}
+        </div>
+
       </div>
+
     </div>
   )
 }

@@ -58,3 +58,25 @@
     font-size: 12px;
     line-height: 4px;
 }
+
+.navlogin {
+    height: 70px;
+    background-color: #003580;
+    display: flex;
+    justify-content: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+
+}
+
+.admin {
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.logo {
+    margin-top: 10px;
+    margin-right: 5px;
+}

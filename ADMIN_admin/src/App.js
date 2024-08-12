@@ -3,6 +3,8 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 
+import Register from "./pages/register/Register";
+
 import New from "./pages/new/New";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -116,6 +118,8 @@ function App() {
                 }
               />
             </Route>
+
+            <Route path="/register" element={<Register />}></Route>
 
 
           </Route>

@@ -17,8 +17,6 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 
-
-
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
   const { dispatch: authDispatch } = useContext(AuthContext);
@@ -30,7 +28,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">lamadmin</span>
+          <span className="logo">Dashboard</span>
         </Link>
       </div>
       <hr />

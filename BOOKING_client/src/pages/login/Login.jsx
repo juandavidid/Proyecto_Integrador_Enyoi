@@ -3,6 +3,13 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./login.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+
+
+
+
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
@@ -35,7 +42,22 @@ const Login = () => {
 
 
     return (
+
+
         <div className="login">
+
+            <nav className="navlogin">
+                <span className="logo" style={{ fontSize: '25px' }}>Booking.com</span>
+                <div>
+                    <FontAwesomeIcon className="iconSingIn" icon={faSignInAlt} />
+                    <FontAwesomeIcon className="textQuestion" icon={faCircleQuestion} />
+
+                </div>
+
+            </nav>
+
+            <h1 className="textLogin">Login In</h1>
+
             <div className="lContainer">
                 <input
                     type="text"
@@ -56,6 +78,27 @@ const Login = () => {
                 </button>
                 {error && <span>{error.message}</span>}
             </div>
+
+            <div className="text-container">
+                <p>
+                    Al iniciar sesión o al crear una cuenta, aceptas nuestros Términos y
+                </p>
+                <p>
+                    condiciones y la Política de privacidad.
+                </p>
+                <p>
+                    Todos los derechos reservados. Copyright (2006 - 2024) - Booking.com™
+                </p>
+                <p>
+                    Copyright (2006 - 2024) - Booking.com™
+
+                </p>
+            </div>
+
+
+
+
+
         </div>
     );
 };

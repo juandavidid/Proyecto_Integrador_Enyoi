@@ -25,5 +25,32 @@
     padding: 5px 10px;
     cursor: pointer;
     color: #003580;
+    border-radius: 5px;
+
+}
+
+.iconUser {
+    margin-right: 20px;
+    font-size: 25px;
+
+}
+
+.textRegister {
+    margin-right: 20px;
+}
+
+.textQuestion {
+    margin-right: 40px;
+    font-size: 20px;
+}
+
+.iconBanderaColombia {
+    margin-right: 40px;
+    margin-top: 5px;
+    font-size: 10px;
+}
+
+.textCop {
+    margin-right: 40px;
 
 }
