@@ -65,6 +65,8 @@ const Datatable = ({ columns }) => {
       },
     },
   ];
+
+  console.log("Lista de datos finales", list)
   return (
     <div className="datatable">
 
