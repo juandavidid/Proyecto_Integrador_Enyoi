@@ -44,7 +44,7 @@ const Register = () => {
 
       // Registrar Usuario
 
-      await axios.post("http://localhost:8800/api/auth/register", info);
+      await axios.post("https://proyecto-integrador-enyoi-1-servidor.onrender.com/api/auth/register", info);
 
       setOpenModal(true);
 
@@ -53,7 +53,7 @@ const Register = () => {
 
       // Iniciar sesión automáticamente
       dispatch({ type: "LOGIN_START" });
-      const res = await axios.post("http://localhost:8800/api/auth/login", {
+      const res = await axios.post("https://proyecto-integrador-enyoi-1-servidor.onrender.com/api/auth/login", {
         username: info.username,
         password: info.password,
       });

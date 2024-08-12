@@ -89,7 +89,6 @@ const Datatable = ({ columns }) => {
         getRowId={row => row._id}       // linea de codigo nueva
       />
 
-
     </div>
   );
 };
