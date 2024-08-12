@@ -9,7 +9,7 @@ export default defineConfig({
     server: {
         proxy: {
             '/api': {
-                target: "https://proyecto-integrador-enyoi-1-servidor.onrender.com/api",
+                target: "http://localhost:8800/api",
                 changeOrigin: true,
                 secure: false,
                 rewrite: (path) => path.replace('/^\/api/', ''),

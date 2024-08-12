@@ -31,8 +31,14 @@ export const getUser = async (req, res, next) => {
 }
 export const getUsers = async (req, res, next) => {
     try {
+
+        console.log("Solicitud Recibida en /api/users")
+
+
         const users = await User.find();
-        //console.log(users)
+
+        console.log("Usuarios encontrados", users);
+
 
         res.status(200).json(users);
     } catch (err) {

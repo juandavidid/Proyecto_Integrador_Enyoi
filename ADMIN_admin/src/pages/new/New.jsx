@@ -13,7 +13,13 @@ const New = ({ inputs, title }) => {
 
   const handleChange = e => {
 
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    const { id, type, checked, value } = e.target;
+    setInfo((prev) => ({
+      ...prev,
+      [id]: type === "checkbox" ? checked : value, // Maneja el checkbox
+    }));
+
+    //setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
 
   };
 
@@ -34,7 +40,7 @@ const New = ({ inputs, title }) => {
         ...info,
         img: url,
       }
-      await axios.post("https://proyecto-integrador-enyoi.onrender.com/api/auth/register", newUser)
+      await axios.post("http://localhost:8800/api/auth/register", newUser)
 
     } catch (err) {
       console.log(err)

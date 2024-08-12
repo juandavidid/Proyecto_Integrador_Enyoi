@@ -18,10 +18,12 @@ const Datatable = ({ columns }) => {
 
   const [list, setList] = useState([]); // Linea de codigo nueva  nota: siempre colocar useState([])
   console.log(list);
-  const { data, loading, error } = useFetch(`https://proyecto-integrador-enyoi.onrender.com/api/${path}`);
+
+
+  const { data, loading, error } = useFetch(`/api/${path}`);
   console.log("Datos de los usurios", data);
   console.log(loading);
-  console.log(error);
+  console.log("Error de peticion", error);
 
   //Linea de codigo Nueva
   useEffect(() => {
@@ -33,7 +35,7 @@ const Datatable = ({ columns }) => {
   const handleDelete = async (id) => {
 
     try {
-      await axios.delete(`https://proyecto-integrador-enyoi.onrender.com/api/${path}/${id}`);
+      await axios.delete(`/api/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {
 
@@ -65,12 +67,16 @@ const Datatable = ({ columns }) => {
   ];
   return (
     <div className="datatable">
+
       <div className="datatableTitle">
         {path}
+
         <Link to={`/${path}/new`} className="link">
           Add New
         </Link>
+
       </div>
+
       <DataGrid
         className="datagrid"
         rows={list}  // rows={data}   // Liena de codigo nueva
@@ -80,6 +86,8 @@ const Datatable = ({ columns }) => {
         checkboxSelection
         getRowId={row => row._id}       // linea de codigo nueva
       />
+
+
     </div>
   );
 };

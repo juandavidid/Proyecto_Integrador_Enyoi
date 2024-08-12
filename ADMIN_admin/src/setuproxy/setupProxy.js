@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: "https://proyecto-integrador-enyoi-1-servidor.onrender.com/api",
+            target: "http://localhost:8800/api",
             changeOrigin: true,
             secure: false,
             pathRewrite: {

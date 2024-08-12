@@ -32,7 +32,7 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     try {
 
-      const res = await axios.post("https://proyecto-integrador-enyoi.onrender.com/api/auth/login", credentials);
+      const res = await axios.post("http://localhost:8800/api/auth/login", credentials);
       console.log(res);
 
       if (res.data.isAdmin) {
