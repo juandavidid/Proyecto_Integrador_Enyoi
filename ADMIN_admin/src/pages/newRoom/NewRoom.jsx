@@ -16,7 +16,7 @@ const NewRoom = () => {
   const [rooms, setRooms] = useState([]);
 
 
-  const { data, loading, error } = useFetch("/api/hotels");
+  const { data, loading, error } = useFetch("https://proyecto-integrador-enyoi.onrender.com/api/hotels");
 
   const handleChange = e => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -27,7 +27,7 @@ const NewRoom = () => {
     const roomNumbers = rooms.split(",").map((room) => ({ number: room }))
     console.log(roomNumbers)
     try {
-      await axios.post(`/api/rooms/${hotelId}`, { ...info, roomNumbers })
+      await axios.post(`https://proyecto-integrador-enyoi.onrender.com/api/rooms/${hotelId}`, { ...info, roomNumbers })
     } catch (err) {
       console.log(err)
     }

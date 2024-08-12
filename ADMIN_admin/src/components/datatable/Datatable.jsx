@@ -18,7 +18,7 @@ const Datatable = ({ columns }) => {
 
   const [list, setList] = useState([]); // Linea de codigo nueva  nota: siempre colocar useState([])
   console.log(list);
-  const { data, loading, error } = useFetch(`/api/${path}`);
+  const { data, loading, error } = useFetch(`https://proyecto-integrador-enyoi.onrender.com/api/${path}`);
   console.log("Datos de los usurios", data);
   console.log(loading);
   console.log(error);
@@ -33,7 +33,7 @@ const Datatable = ({ columns }) => {
   const handleDelete = async (id) => {
 
     try {
-      await axios.delete(`/api/${path}/${id}`);
+      await axios.delete(`https://proyecto-integrador-enyoi.onrender.com/api/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {
 

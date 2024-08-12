@@ -34,7 +34,7 @@ const New = ({ inputs, title }) => {
         ...info,
         img: url,
       }
-      await axios.post("/api/auth/register", newUser)
+      await axios.post("https://proyecto-integrador-enyoi.onrender.com/api/auth/register", newUser)
 
     } catch (err) {
       console.log(err)
